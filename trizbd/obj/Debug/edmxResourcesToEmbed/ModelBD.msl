@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище kadri3ModelContainer" CdmEntityContainer="kadriEntities">
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="kadri3Model.Departments">
+        <MappingFragment StoreEntitySet="Departments">
+          <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+          <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="kadri3Model.Employees">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+          <ScalarProperty Name="Birth_Date" ColumnName="Birth_Date" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
+          <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employment_Contracts">
+      <EntityTypeMapping TypeName="kadri3Model.Employment_Contracts">
+        <MappingFragment StoreEntitySet="Employment_Contracts">
+          <ScalarProperty Name="Contract_ID" ColumnName="Contract_ID" />
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+          <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Positions">
+      <EntityTypeMapping TypeName="kadri3Model.Positions">
+        <MappingFragment StoreEntitySet="Positions">
+          <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
+          <ScalarProperty Name="Position_Name" ColumnName="Position_Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salaries">
+      <EntityTypeMapping TypeName="kadri3Model.Salaries">
+        <MappingFragment StoreEntitySet="Salaries">
+          <ScalarProperty Name="Salary_ID" ColumnName="Salary_ID" />
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
+          <ScalarProperty Name="Payment_Type" ColumnName="Payment_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vacations">
+      <EntityTypeMapping TypeName="kadri3Model.Vacations">
+        <MappingFragment StoreEntitySet="Vacations">
+          <ScalarProperty Name="Vacation_ID" ColumnName="Vacation_ID" />
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+          <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+          <ScalarProperty Name="Vacation_Type" ColumnName="Vacation_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

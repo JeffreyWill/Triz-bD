@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="86ce6bdc863944fdaf4e9b4faaa6cabe" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="kadri3Model.Departments" Width="1.5" PointX="0.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kadri3Model.Employees" Width="1.5" PointX="7.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="kadri3Model.Employment_Contracts" Width="1.5" PointX="2.875" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kadri3Model.Positions" Width="1.5" PointX="0.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="kadri3Model.Salaries" Width="1.5" PointX="2.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="kadri3Model.Vacations" Width="1.5" PointX="5" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="kadri3Model.FK__Employees__Depar__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="kadri3Model.FK__Employees__Posit__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="kadri3Model.FK__Employmen__Emplo__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="kadri3Model.FK__Salaries__Employ__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="kadri3Model.FK__Vacations__Emplo__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="kadri3Model.FK_Employment_Contracts_Employees" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

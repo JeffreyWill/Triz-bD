@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище kadri3Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Department_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Department_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Full_Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Birth_Date" Type="date" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Position_ID" Type="int" />
+          <Property Name="Department_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Employment_Contracts">
+          <Key>
+            <PropertyRef Name="Contract_ID" />
+          </Key>
+          <Property Name="Contract_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_ID" Type="int" />
+          <Property Name="Start_Date" Type="date" Nullable="false" />
+          <Property Name="End_Date" Type="date" />
+          <Property Name="Salary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Position_ID" />
+          </Key>
+          <Property Name="Position_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Position_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Salaries">
+          <Key>
+            <PropertyRef Name="Salary_ID" />
+          </Key>
+          <Property Name="Salary_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_ID" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Payment_Date" Type="date" Nullable="false" />
+          <Property Name="Payment_Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Vacations">
+          <Key>
+            <PropertyRef Name="Vacation_ID" />
+          </Key>
+          <Property Name="Vacation_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_ID" Type="int" />
+          <Property Name="Start_Date" Type="date" Nullable="false" />
+          <Property Name="End_Date" Type="date" Nullable="false" />
+          <Property Name="Vacation_Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Employees__Depar__3C69FB99">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Department_ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Department_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__Posit__3B75D760">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Position_ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Position_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employmen__Emplo__3F466844">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Employment_Contracts" Type="Self.Employment_Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Employment_Contracts">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salaries__Employ__4222D4EF">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Salaries" Type="Self.Salaries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Salaries">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacations__Emplo__44FF419A">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Vacations" Type="Self.Vacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Vacations">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employment_Contracts_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employment_Contracts" Type="Self.Employment_Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Employment_Contracts">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище kadri3ModelContainer">
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employment_Contracts" EntityType="Self.Employment_Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salaries" EntityType="Self.Salaries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vacations" EntityType="Self.Vacations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Employees__Depar__3C69FB99" Association="Self.FK__Employees__Depar__3C69FB99">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__Posit__3B75D760" Association="Self.FK__Employees__Posit__3B75D760">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employmen__Emplo__3F466844" Association="Self.FK__Employmen__Emplo__3F466844">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employment_Contracts" EntitySet="Employment_Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salaries__Employ__4222D4EF" Association="Self.FK__Salaries__Employ__4222D4EF">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Salaries" EntitySet="Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacations__Emplo__44FF419A" Association="Self.FK__Vacations__Emplo__44FF419A">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Vacations" EntitySet="Vacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employment_Contracts_Employees" Association="Self.FK_Employment_Contracts_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employment_Contracts" EntitySet="Employment_Contracts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kadri3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Department_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__Depar__3C69FB99" FromRole="Departments" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Full_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Birth_Date" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Position_ID" Type="Int32" />
+          <Property Name="Department_ID" Type="Int32" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Employees__Depar__3C69FB99" FromRole="Employees" ToRole="Departments" />
+          <NavigationProperty Name="Positions" Relationship="Self.FK__Employees__Posit__3B75D760" FromRole="Employees" ToRole="Positions" />
+          <NavigationProperty Name="Employment_Contracts" Relationship="Self.FK__Employmen__Emplo__3F466844" FromRole="Employees" ToRole="Employment_Contracts" />
+          <NavigationProperty Name="Salaries" Relationship="Self.FK__Salaries__Employ__4222D4EF" FromRole="Employees" ToRole="Salaries" />
+          <NavigationProperty Name="Vacations" Relationship="Self.FK__Vacations__Emplo__44FF419A" FromRole="Employees" ToRole="Vacations" />
+          <NavigationProperty Name="Employment_Contracts1" Relationship="Self.FK_Employment_Contracts_Employees" FromRole="Employees" ToRole="Employment_Contracts" />
+        </EntityType>
+        <EntityType Name="Employment_Contracts">
+          <Key>
+            <PropertyRef Name="Contract_ID" />
+          </Key>
+          <Property Name="Contract_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_ID" Type="Int32" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Precision="0" />
+          <Property Name="Salary" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employmen__Emplo__3F466844" FromRole="Employment_Contracts" ToRole="Employees" />
+          <NavigationProperty Name="Employees1" Relationship="Self.FK_Employment_Contracts_Employees" FromRole="Employment_Contracts" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Position_ID" />
+          </Key>
+          <Property Name="Position_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Position_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__Posit__3B75D760" FromRole="Positions" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Salaries">
+          <Key>
+            <PropertyRef Name="Salary_ID" />
+          </Key>
+          <Property Name="Salary_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_ID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Payment_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Payment_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Salaries__Employ__4222D4EF" FromRole="Salaries" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Vacations">
+          <Key>
+            <PropertyRef Name="Vacation_ID" />
+          </Key>
+          <Property Name="Vacation_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_ID" Type="Int32" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Vacation_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Vacations__Emplo__44FF419A" FromRole="Vacations" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK__Employees__Depar__3C69FB99">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Employees" Type="kadri3Model.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Department_ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Department_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__Posit__3B75D760">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="0..1" />
+          <End Role="Employees" Type="kadri3Model.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Position_ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Position_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employmen__Emplo__3F466844">
+          <End Role="Employees" Type="kadri3Model.Employees" Multiplicity="0..1" />
+          <End Role="Employment_Contracts" Type="Self.Employment_Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Employment_Contracts">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salaries__Employ__4222D4EF">
+          <End Role="Employees" Type="kadri3Model.Employees" Multiplicity="0..1" />
+          <End Role="Salaries" Type="Self.Salaries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Salaries">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacations__Emplo__44FF419A">
+          <End Role="Employees" Type="kadri3Model.Employees" Multiplicity="0..1" />
+          <End Role="Vacations" Type="Self.Vacations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Vacations">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employment_Contracts_Employees">
+          <End Role="Employees" Type="kadri3Model.Employees" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employment_Contracts" Type="Self.Employment_Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Employment_Contracts">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kadriEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Departments" />
+          <EntitySet Name="Employees" EntityType="kadri3Model.Employees" />
+          <EntitySet Name="Employment_Contracts" EntityType="Self.Employment_Contracts" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" />
+          <EntitySet Name="Salaries" EntityType="Self.Salaries" />
+          <EntitySet Name="Vacations" EntityType="Self.Vacations" />
+          <AssociationSet Name="FK__Employees__Depar__3C69FB99" Association="Self.FK__Employees__Depar__3C69FB99">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__Posit__3B75D760" Association="Self.FK__Employees__Posit__3B75D760">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employmen__Emplo__3F466844" Association="Self.FK__Employmen__Emplo__3F466844">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employment_Contracts" EntitySet="Employment_Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salaries__Employ__4222D4EF" Association="Self.FK__Salaries__Employ__4222D4EF">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Salaries" EntitySet="Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacations__Emplo__44FF419A" Association="Self.FK__Vacations__Emplo__44FF419A">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Vacations" EntitySet="Vacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employment_Contracts_Employees" Association="Self.FK_Employment_Contracts_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employment_Contracts" EntitySet="Employment_Contracts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище kadri3ModelContainer" CdmEntityContainer="kadriEntities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="kadri3Model.Departments">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="kadri3Model.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+                <ScalarProperty Name="Birth_Date" ColumnName="Birth_Date" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employment_Contracts">
+            <EntityTypeMapping TypeName="kadri3Model.Employment_Contracts">
+              <MappingFragment StoreEntitySet="Employment_Contracts">
+                <ScalarProperty Name="Contract_ID" ColumnName="Contract_ID" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="kadri3Model.Positions">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
+                <ScalarProperty Name="Position_Name" ColumnName="Position_Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salaries">
+            <EntityTypeMapping TypeName="kadri3Model.Salaries">
+              <MappingFragment StoreEntitySet="Salaries">
+                <ScalarProperty Name="Salary_ID" ColumnName="Salary_ID" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
+                <ScalarProperty Name="Payment_Type" ColumnName="Payment_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vacations">
+            <EntityTypeMapping TypeName="kadri3Model.Vacations">
+              <MappingFragment StoreEntitySet="Vacations">
+                <ScalarProperty Name="Vacation_ID" ColumnName="Vacation_ID" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Vacation_Type" ColumnName="Vacation_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,49 @@
+﻿<Window x:Class="trizbd.AddEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавление сотрудника" Height="500" Width="800" Background="#2c2f33">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" FontSize="24" HorizontalAlignment="Center" Foreground="#7289da">добавление сотрудника</Label>
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center">имя:</Label>
+            <TextBox x:Name="textBoxFullName" Grid.Row="0" Grid.Column="1" Background="#36393f" Foreground="White" BorderBrush="#7289da" VerticalAlignment="Center" Height="30" Text="{Binding Full_Name}"/>
+            <Label Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center">дата рождения:</Label>
+            <TextBox x:Name="textBoxBirthDate" Grid.Row="1" Grid.Column="1" Background="#36393f" Foreground="White" BorderBrush="#7289da" VerticalAlignment="Center" Height="30" Text="{Binding Birth_Date, StringFormat=\{0:dd.MM.yyyy\}}"/>
+            <Label Grid.Row="2" Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center">пол:</Label>
+            <ComboBox x:Name="comboBoxGender" Grid.Row="2" Grid.Column="1" Background="#36393f" Foreground="Black" BorderBrush="#7289da" VerticalAlignment="Center" Height="30" SelectedItem="{Binding Gender}" SelectionChanged="comboBoxGender_SelectionChanged">
+                <ComboBoxItem Content="F"/>
+                <ComboBoxItem Content="M"/>
+            </ComboBox>
+            <Label Grid.Row="3" Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center">адрес:</Label>
+            <TextBox x:Name="textBoxAddress" Grid.Row="3" Grid.Column="1" Background="#36393f" Foreground="White" BorderBrush="#7289da" VerticalAlignment="Center" Height="30" Text="{Binding Address}"/>
+            <Label Grid.Row="4" Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center">телефон:</Label>
+            <TextBox x:Name="textBoxPhone" Grid.Row="4" Grid.Column="1" Background="#36393f" Foreground="White" BorderBrush="#7289da" VerticalAlignment="Center" Height="30" Text="{Binding Phone}"/>
+            <Label Grid.Row="5" Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center">должность:</Label>
+            <ComboBox x:Name="comboBoxPosition_ID" Grid.Row="5" Grid.Column="1" Background="#36393f" Foreground="Black" BorderBrush="#7289da" VerticalAlignment="Center" Height="30" DisplayMemberPath="Position_Name" SelectedValuePath="Position_ID" SelectedValue="{Binding Position_ID}" SelectionChanged="comboBoxPosition_ID_SelectionChanged"/>
+            <Label Grid.Row="6" Grid.Column="0" Foreground="White" FontSize="14" VerticalAlignment="Center">отдел:</Label>
+            <ComboBox x:Name="comboBoxDepartment_ID" Grid.Row="6" Grid.Column="1" Background="#36393f" Foreground="Black" BorderBrush="#7289da" VerticalAlignment="Center" Height="30" DisplayMemberPath="Department_Name" SelectedValuePath="Department_ID" SelectedValue="{Binding Department_ID}"/>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="buttonSave" Height="40" Width="150" Content="сохранить" FontSize="16" Background="#7289da" Foreground="White" Click="buttonSave_Click" Margin="0,0,10,0"/>
+            <Button x:Name="buttonBack" Height="40" Width="150" Content="назад" FontSize="16" Background="#7289da" Foreground="White" Click="buttonBack_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

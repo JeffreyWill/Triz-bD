@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище kadri3Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="Department_ID" />
+    </Key>
+    <Property Name="Department_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Department_Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Full_Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Birth_Date" Type="date" />
+    <Property Name="Gender" Type="char" MaxLength="1" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Position_ID" Type="int" />
+    <Property Name="Department_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Employment_Contracts">
+    <Key>
+      <PropertyRef Name="Contract_ID" />
+    </Key>
+    <Property Name="Contract_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Employee_ID" Type="int" />
+    <Property Name="Start_Date" Type="date" Nullable="false" />
+    <Property Name="End_Date" Type="date" />
+    <Property Name="Salary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Positions">
+    <Key>
+      <PropertyRef Name="Position_ID" />
+    </Key>
+    <Property Name="Position_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Position_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Salaries">
+    <Key>
+      <PropertyRef Name="Salary_ID" />
+    </Key>
+    <Property Name="Salary_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Employee_ID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Payment_Date" Type="date" Nullable="false" />
+    <Property Name="Payment_Type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Vacations">
+    <Key>
+      <PropertyRef Name="Vacation_ID" />
+    </Key>
+    <Property Name="Vacation_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Employee_ID" Type="int" />
+    <Property Name="Start_Date" Type="date" Nullable="false" />
+    <Property Name="End_Date" Type="date" Nullable="false" />
+    <Property Name="Vacation_Type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Employees__Depar__3C69FB99">
+    <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="Department_ID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="Department_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employees__Posit__3B75D760">
+    <End Role="Positions" Type="Self.Positions" Multiplicity="0..1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Positions">
+        <PropertyRef Name="Position_ID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="Position_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employmen__Emplo__3F466844">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+    <End Role="Employment_Contracts" Type="Self.Employment_Contracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Employment_Contracts">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Salaries__Employ__4222D4EF">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+    <End Role="Salaries" Type="Self.Salaries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Salaries">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vacations__Emplo__44FF419A">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+    <End Role="Vacations" Type="Self.Vacations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Vacations">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employment_Contracts_Employees">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Employment_Contracts" Type="Self.Employment_Contracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Employment_Contracts">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище kadri3ModelContainer">
+    <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employment_Contracts" EntityType="Self.Employment_Contracts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salaries" EntityType="Self.Salaries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vacations" EntityType="Self.Vacations" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Employees__Depar__3C69FB99" Association="Self.FK__Employees__Depar__3C69FB99">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employees__Posit__3B75D760" Association="Self.FK__Employees__Posit__3B75D760">
+      <End Role="Positions" EntitySet="Positions" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employmen__Emplo__3F466844" Association="Self.FK__Employmen__Emplo__3F466844">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Employment_Contracts" EntitySet="Employment_Contracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Salaries__Employ__4222D4EF" Association="Self.FK__Salaries__Employ__4222D4EF">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Salaries" EntitySet="Salaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vacations__Emplo__44FF419A" Association="Self.FK__Vacations__Emplo__44FF419A">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Vacations" EntitySet="Vacations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employment_Contracts_Employees" Association="Self.FK_Employment_Contracts_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Employment_Contracts" EntitySet="Employment_Contracts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
